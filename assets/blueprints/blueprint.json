@@ -1,0 +1,48 @@
+{
+    "landingPage": "/wp-admin/post.php?post=30&action=elementor",
+    "phpExtensionBundles": [
+      "kitchen-sink"
+    ],
+    "features": {
+      "networking": true
+    },
+    "steps": [
+      {
+        "step": "login",
+        "username": "admin",
+        "password": "password"
+      },
+      {
+        "step": "installPlugin",
+        "pluginZipFile": {
+          "resource": "url",
+          "url": "https://downloads.wordpress.org/plugin/elementor.zip"
+        },
+        "options": {
+          "activate": true
+        }
+      },
+      {
+        "step": "installPlugin",
+        "pluginZipFile": {
+          "resource": "url",
+          "url": "https://downloads.wordpress.org/plugin/announcement-notice.zip"
+        },
+        "options": {
+          "activate": true
+        }
+      },
+      {
+        "step": "importFile",
+        "file": {
+          "resource": "url",
+          "url": "https://raw.githubusercontent.com/thesharifdev/elemaker/main/playground/demo.xml"
+        }
+      },
+      {
+        "step": "writeFile",
+        "path": "/wordpress/wp-content/mu-plugins/annoncement-temp.php",
+        "data": "<?php add_action('init', function() { if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'elementor-app') { wp_safe_redirect( home_url('/wp-admin/post.php?post=30&action=elementor') ); exit; } });"
+      }
+    ]
+  }  
